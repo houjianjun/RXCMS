@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccbits.mapper.ManagerMapper">
+	<resultMap id="BaseResultMap" type="com.ccbits.entity.Manager">
+		<id column="M_Id" jdbcType="INTEGER" property="id" />
+		<result column="M_Name" jdbcType="VARCHAR" property="name" />
+		<result column="M_PWD" jdbcType="VARCHAR" property="pwd" />
+		<result column="M_LoginTime" jdbcType="TIMESTAMP" property="logintime" />
+		<result column="M_LoginNum" jdbcType="INTEGER" property="loginnum" />
+		<result column="M_IsSuper" jdbcType="INTEGER" property="issuper" />
+	</resultMap>
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="com.ccbits.entity.Manager">
+		insert into manager (M_Id,
+		M_Name, M_PWD,
+		M_LoginTime, M_LoginNum, M_IsSuper
+		)
+		values (#{id},
+		#{name}, #{pwd},
+		#{logintime}, #{loginnum}, #{issuper}
+		)
+	</insert>
+	<!-- 条件查询 -->
+	<select id="selectManager" resultType="Manager" parameterType="Manager">
+		SELECT M_Id, M_Name, M_PWD, M_LoginTime, M_LoginNum, M_IsSuper FROM
+		manager WHERE M_Name=#{name} AND M_PWD=#{pwd}
+	</select>
+	<!-- 删除记录 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		manager
+		where M_Id = #{id}
+	</delete>
+	<!-- 批量删除 -->
+	<delete id="deleteByKeys" parameterType="java.lang.String">
+		delete from
+		manager
+		where M_Id in 
+		<foreach item="keys" collection="array" open="(" separator="," close=")">
+            #{keys}
+        </foreach>
+	</delete>
+	<!-- 更改记录 -->
+	<update id="updateByPrimaryKey" parameterType="com.ccbits.entity.Manager">
+		update manager
+		set
+		M_Name = #{name},
+		M_PWD = #{pwd},
+		M_LoginTime = #{logintime},
+		M_LoginNum
+		= #{loginnum},
+		M_IsSuper = #{issuper}
+		where M_Id = #{id}
+	</update>
+	<!-- 根据主键查询 -->
+	<sql id="Base_Column_List">
+		M_Id, M_Name, M_PWD, M_LoginTime, M_LoginNum, M_IsSuper
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from manager
+		where M_Id = #{id}
+	</select>
+	<!-- 查询所有 -->
+	<select id="selectByAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from manager
+	</select>
+	
+</mapper>

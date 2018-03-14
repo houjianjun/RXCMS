@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccbits.mapper.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.ccbits.entity.News" >
+    <id column="N_Id" property="id" jdbcType="INTEGER" />
+    <result column="N_Title" property="title" jdbcType="VARCHAR" />
+    <result column="N_Author" property="author" jdbcType="VARCHAR" />
+    <result column="N_Time" property="time" jdbcType="TIMESTAMP" />
+    <result column="N_Count" property="count" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ccbits.entity.News" extends="BaseResultMap" >
+    <result column="N_Context" property="context" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    N_Id, N_Title, N_Author, N_Time, N_Count
+  </sql>
+  <sql id="Blob_Column_List" >
+    N_Context
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news
+    where N_Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news
+    where N_Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ccbits.entity.News" >
+    insert into news (N_Id, N_Title, N_Author, 
+      N_Time, N_Count, N_Context
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{count,jdbcType=INTEGER}, #{context,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+ 
+  <update id="updateByPrimaryKey" parameterType="com.ccbits.entity.News" >
+    update news
+    set N_Title = #{title,jdbcType=VARCHAR},
+      N_Author = #{author,jdbcType=VARCHAR},
+      N_Time = #{time,jdbcType=TIMESTAMP},
+      N_Count = #{count,jdbcType=INTEGER}
+    where N_Id = #{id,jdbcType=INTEGER}
+  </update>
+      <!-- 查询所有 -->
+	<select id="selectByAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from news
+	</select>
+</mapper>

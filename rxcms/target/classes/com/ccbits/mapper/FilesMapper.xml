@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccbits.mapper.FilesMapper">
+	<resultMap id="BaseResultMap" type="com.ccbits.entity.Files">
+		<id column="F_Id" property="id" jdbcType="INTEGER" />
+		<result column="F_Title" property="title" jdbcType="VARCHAR" />
+		<result column="F_Type" property="type" jdbcType="VARCHAR" />
+		<result column="F_Src" property="src" jdbcType="VARCHAR" />
+		<result column="F_Time" property="time" jdbcType="TIMESTAMP" />
+		<result column="F_Count" property="count" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.ccbits.entity.Files"
+		extends="BaseResultMap">
+		<result column="F_Desc" property="desc" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		F_Id, F_Title, F_Type, F_Src, F_Time, F_Count
+	</sql>
+	<sql id="Blob_Column_List">
+		F_Desc
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from files
+		where F_Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from files
+		where F_Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ccbits.entity.Files">
+		insert into files (F_Id, F_Title, F_Type,
+		F_Src, F_Time, F_Count,
+		F_Desc)
+		values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{src,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{count,jdbcType=INTEGER},
+		#{desc,jdbcType=LONGVARCHAR})
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="com.ccbits.entity.Files">
+		update files
+		set F_Title = #{title,jdbcType=VARCHAR},
+		F_Type = #{type,jdbcType=VARCHAR},
+		F_Src = #{src,jdbcType=VARCHAR},
+		F_Time = #{time,jdbcType=TIMESTAMP},
+		F_Count = #{count,jdbcType=INTEGER}
+		where F_Id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 查询所有 -->
+	<select id="selectByAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from files
+	</select>
+</mapper>

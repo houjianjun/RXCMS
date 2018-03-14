@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccbits.mapper.NewsClassMapper" >
+  <resultMap id="BaseResultMap" type="com.ccbits.entity.NewsClass" >
+    <id column="NS_Id" property="id" jdbcType="INTEGER" />
+    <result column="NS_Name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ccbits.entity.NewsClass" extends="BaseResultMap" >
+    <result column="NS_Desc" property="desc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    NS_Id, NS_Name
+  </sql>
+  <sql id="Blob_Column_List" >
+    NS_Desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from newsclass
+    where NS_Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from newsclass
+    where NS_Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ccbits.entity.NewsClass" >
+    insert into newsclass (NS_Id, NS_Name, NS_Desc
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+ 
+  <update id="updateByPrimaryKey" parameterType="com.ccbits.entity.NewsClass" >
+    update newsclass
+    set NS_Name = #{name,jdbcType=VARCHAR}
+    where NS_Id = #{id,jdbcType=INTEGER}
+  </update>
+        <!-- 查询所有 -->
+	<select id="selectByAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from newsclass
+	</select>
+</mapper>
