@@ -2,6 +2,7 @@ package com.ccbits.service;
 
 import java.util.List;
 
+import com.ccbits.entity.Manager;
 import com.ccbits.entity.Roles;
 
 /**
@@ -14,4 +15,8 @@ import com.ccbits.entity.Roles;
 public interface RolesI {
 	public List<Roles> getAll();
 	public boolean add(Roles roles);
+	public boolean removesRoles(String[] keys);
+	public Roles get(Integer id);
+	//更新管理员
+	public boolean update(Roles roles);
 }

@@ -62,4 +62,25 @@
 		</table>
 	</div>
 </body>
+<script type="text/javascript" src="/static/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/static/js/common.js"></script>
+<script type="text/javascript">
+	$("#btnAdd").on("click", function() {
+		$(location).attr('href', '/admin/news/addOrEdit?id=');
+	});
+	//删除事件
+	$("#btnDel").on("click",function(){
+		var dels="";
+		$('input:checkbox.chks').each(function() {
+			if($(this).parent("span").attr("class") === "checked"){
+				dels+=$(this).val()+",";
+			}
+		});
+		$(location).attr("href","dels?dels="+dels.substring(0,dels.length-1));
+	});
+	//编辑
+	function btnEdit(id){
+		$(location).attr("href","edit?id="+id);
+	}
+</script>
 </html>

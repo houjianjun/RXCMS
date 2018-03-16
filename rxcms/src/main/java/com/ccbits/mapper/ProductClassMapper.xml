@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ccbits.mapper.ProductClassMapper" >
-  <resultMap id="BaseResultMap" type="com.ccbits.entity.ProductClass" >
-    <id column="PC_Id" property="id" jdbcType="INTEGER" />
-    <result column="PC_Name" property="name" jdbcType="VARCHAR" />
-    <result column="P_ParentId" property="parentid" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.ccbits.entity.ProductClass" extends="BaseResultMap" >
-    <result column="PC_Des" property="des" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    PC_Id, PC_Name, P_ParentId
-  </sql>
-  <sql id="Blob_Column_List" >
-    PC_Des
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from productclass
-    where PC_Id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from productclass
-    where PC_Id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.ccbits.entity.ProductClass" >
-    insert into productclass (PC_Id, PC_Name, P_ParentId, 
-      PC_Des)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
-      #{des,jdbcType=LONGVARCHAR})
-  </insert>
+<mapper namespace="com.ccbits.mapper.ProductClassMapper">
+	<resultMap id="BaseResultMap" type="com.ccbits.entity.ProductClass">
+		<id column="PC_Id" property="id" jdbcType="INTEGER" />
+		<result column="PC_Name" property="name" jdbcType="VARCHAR" />
+		<result column="P_ParentId" property="parentid" jdbcType="INTEGER" />
+		<result column="PC_Des" property="des" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		PC_Id, PC_Name, P_ParentId,PC_Des
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from productclass
+		where PC_Id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from productclass
+		where PC_Id = #{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 批量删除 -->
+	<delete id="deleteByKeys" parameterType="java.lang.String">
+		delete from
+		productclass
+		where PC_Id in
+		<foreach item="keys" collection="array" open="(" separator=","
+			close=")">
+			#{keys}
+		</foreach>
+	</delete>
+	<insert id="insert" parameterType="com.ccbits.entity.ProductClass">
+		insert into productclass (PC_Id, PC_Name, P_ParentId,
+		PC_Des)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{parentid,jdbcType=INTEGER},
+		#{des,jdbcType=LONGVARCHAR})
+	</insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.ccbits.entity.ProductClass" >
-    update productclass
-    set PC_Name = #{name,jdbcType=VARCHAR},
-      P_ParentId = #{parentid,jdbcType=INTEGER}
-    where PC_Id = #{id,jdbcType=INTEGER}
-  </update>
-  
-  <!-- 查询所有 -->
+	<update id="updateByPrimaryKey" parameterType="com.ccbits.entity.ProductClass">
+		update productclass
+		set PC_Name = #{name,jdbcType=VARCHAR},
+		P_ParentId = #{parentid,jdbcType=INTEGER},
+		PC_Des=#{des}
+		where PC_Id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 查询所有 -->
 	<select id="selectByAll" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

@@ -20,4 +20,6 @@ public interface SysconfigMapper {
     int updateByPrimaryKey(Sysconfig record);
     
     List<Sysconfig> selectByAll();
+    
+	int deleteByKeys(String[] split);
 }

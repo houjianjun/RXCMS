@@ -20,21 +20,21 @@ p {
 		<br>
 	</div>
 	<div style="margin-left: 20px;">
-		<form action="../manager/add" method="post">
-			<input type="hidden" name="id" value="${product.id}">
+		<form action="../productClass/add" method="post">
+			<input type="hidden" name="id" value="${productClass.id}">
 			<p>
 				<label>账号</label> <span class="field"><input type="text"
-					name="name" value="${product.name }" class="smallinput"></span> <small
+					name="name" value="${productClass.name }" class="smallinput"></span> <small
 					class="desc">请输入分类名.</small>
 			</p>
 			<p>
 				<label>描述</label> <span class="field">
 				<textarea name="des" cols="80"
-						rows="5" class="longinput"></textarea>
+						rows="5" class="longinput">${productClass.des }</textarea>
 				</span>
 			</p>
 			<p class="stdformbutton">
-				<button type="submit" class="submit radius2">添加</button>
+				<button type="submit" class="submit radius2">保存</button>
 				<input type="reset" class="reset radius2" value="重置">
 			</p>
 		</form>

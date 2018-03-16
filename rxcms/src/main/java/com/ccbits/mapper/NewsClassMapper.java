@@ -16,4 +16,6 @@ public interface NewsClassMapper {
     int updateByPrimaryKey(NewsClass record);
     
     List<NewsClass> selectByAll();
+
+	int deleteByKeys(String[] keys);
 }

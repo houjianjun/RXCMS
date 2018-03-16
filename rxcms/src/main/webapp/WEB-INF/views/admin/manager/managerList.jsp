@@ -68,15 +68,12 @@
 		</table>
 	</div>
 	<script type="text/javascript" src="/static/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="/static/js/common.js"></script>
 	<script type="text/javascript">
 		$("#btnAdd").on("click", function() {
 			$(location).attr('href', '/admin/manager/addOrEdit?id=');
 		});
-		//删除功能
-		$("#btnDel").on("click", function() {
-
-		});
-		//添加复选按钮事件
+/*  		//添加复选按钮事件
 		$(function() {
 			$('input:checkbox.chks').each(function() {
 				$(this).on("click", function() {
@@ -87,7 +84,7 @@
 					}
 				});
 			});
-		})
+		});
 
 		//全选事件
 		$("#chkall").on("click", function() {
@@ -98,7 +95,7 @@
 				$(this).parent("span").addClass("checked");
 				$('input:checkbox.chks').parent("span").addClass("checked");
 			}
-		});
+		});  */
 		//删除事件
 		$("#btnDel").on("click",function(){
 			var dels="";

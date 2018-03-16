@@ -16,30 +16,25 @@ p {
 
 <body>
 	<div class="pageheader">
-		<h1 class="pagetitle">文件管理</h1>
+		<h1 class="pagetitle">配置管理</h1>
 		<br>
 	</div>
 	<div style="margin-left: 20px;">
-		<form action="../manager/add" method="post">
-			<input type="hidden" name="id" value="${files.id}">
+		<form action="../sysconfig/add" method="post">
+			<input type="hidden" name="id" value="${sysconfig.id}">
 			<p>
-				<label>标题</label> <span class="field"><input type="text"
-					name="name" value="${files.title }" class="smallinput"></span> <small
-					class="desc">请输入文件标题.</small>
-			</p>
-			<p>
-				<label>路径</label>
-				<span class="field"><input type="file" name="src" value="${files.src }"  class="smallinput"></span>
-				<small class="desc">请选择文件.</small>
+				<label>名称</label> <span class="field"><input type="text"
+					name="title" value="${sysconfig.title }" class="smallinput"></span> <small
+					class="desc">请输入配置名称.</small>
 			</p>
 			<p>
 				<label>内容</label> <span class="field">
-				<textarea name="des" cols="80"
-						rows="5" class="longinput">${news.content }</textarea>
+				<textarea name="context" cols="80"
+						rows="5" class="longinput">${sysconfig.context}</textarea>
 				</span>
 			</p>
 			<p class="stdformbutton">
-				<button type="submit" class="submit radius2">添加</button>
+				<button type="submit" class="submit radius2">保存</button>
 				<input type="reset" class="reset radius2" value="重置">
 			</p>
 		</form>

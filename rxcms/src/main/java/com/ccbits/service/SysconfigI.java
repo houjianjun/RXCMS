@@ -14,4 +14,7 @@ import com.ccbits.entity.Sysconfig;
 public interface SysconfigI {
 	public List<Sysconfig> getAll();
 	public boolean add(Sysconfig sysconfig);
+	public boolean removesSysconfig(String[] split);
+	public Sysconfig get(Integer id);
+	public boolean update(Sysconfig sysconfig);
 }

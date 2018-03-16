@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-<div class="context">
+	<div class="context">
 		<p class="stdformbutton">
 			<input type="button" id="btnAdd" class="add" value="添加"> <input
 				type="button" id="btnDel" class="del" value="删除">
@@ -49,17 +49,40 @@
 						<td align="center">
 							<div class="checker" id="uniform-undefined">
 								<span> <input type="checkbox" name="chks" class="chks"
-									checked="checked" value="${ productClass.id}" style="opacity: 0;">
+									checked="checked" value="${ productClass.id}"
+									style="opacity: 0;">
 								</span>
 							</div>
 						</td>
 						<td>${productClass.name}</td>
 						<td>${productClass.des}</td>
-						<td><input id="btnEdit" onclick="btnEdit(${productClass.id})" type="button" class="edit" value="编辑"></td>
+						<td><input id="btnEdit" onclick="btnEdit(${productClass.id})"
+							type="button" class="edit" value="编辑"></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 </body>
+<script type="text/javascript" src="/static/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/static/js/common.js"></script>
+<script type="text/javascript">
+	$("#btnAdd").on("click", function() {
+		$(location).attr('href', '/admin/productClass/addOrEdit?id=');
+	});
+	//删除事件
+	$("#btnDel").on("click",function(){
+		var dels="";
+		$('input:checkbox.chks').each(function() {
+			if($(this).parent("span").attr("class") === "checked"){
+				dels+=$(this).val()+",";
+			}
+		});
+		$(location).attr("href","dels?dels="+dels.substring(0,dels.length-1));
+	});
+	//编辑
+	function btnEdit(id){
+		$(location).attr("href","edit?id="+id);
+	}
+</script>
 </html>

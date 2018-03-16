@@ -33,4 +33,25 @@ public class SysconfigImpl implements SysconfigI {
 		return false;
 	}
 
+	@Override
+	public boolean removesSysconfig(String[] split) {
+		if(sm.deleteByKeys(split)>0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Sysconfig get(Integer id) {
+		return sm.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public boolean update(Sysconfig sysconfig) {
+		if(sm.updateByPrimaryKey(sysconfig)>0) {
+			return true;
+		}
+		return false;
+	}
+
 }

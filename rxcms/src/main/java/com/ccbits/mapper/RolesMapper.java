@@ -15,4 +15,7 @@ public interface RolesMapper {
     int updateByPrimaryKey(Roles record);
     
     List<Roles> selectByAll();
+    
+    //批量删除
+    int deleteByKeys(String[] keys);
 }

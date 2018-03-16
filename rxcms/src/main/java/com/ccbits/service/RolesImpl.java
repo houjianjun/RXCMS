@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.ccbits.entity.Manager;
 import com.ccbits.entity.Roles;
 import com.ccbits.mapper.RolesMapper;
 /**
@@ -26,6 +27,25 @@ public class RolesImpl implements RolesI {
 	@Override
 	public boolean add(Roles roles) {
 		if(rm.insert(roles)>0) {
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public boolean removesRoles(String[] keys) {
+		if(rm.deleteByKeys(keys)>0) {
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public Roles get(Integer id) {
+		Roles roles=rm.selectByPrimaryKey(id);
+		return roles;
+	}
+	@Override
+	public boolean update(Roles roles) {
+		if(rm.updateByPrimaryKey(roles)>0) {
 			return true;
 		}
 		return false;

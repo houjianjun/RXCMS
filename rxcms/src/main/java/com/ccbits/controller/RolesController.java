@@ -50,9 +50,9 @@ public class RolesController {
 	}
 
 	/**
-	 * 添加用户
+	 * 添加角色
 	 * 
-	 * @param manager
+	 * @param roles
 	 * @return
 	 * @throws IOException
 	 */
@@ -64,7 +64,37 @@ public class RolesController {
 				response.sendRedirect("rolesList");
 			}
 		}else {
-			
+			if(ri.update(roles)) {
+				response.sendRedirect("rolesList");
+			}
 		}
+	}
+	
+	/**
+	 * 删除角色
+	 * @param roles
+	 * @param response
+	 * @throws IOException
+	 */
+	@GetMapping("/dels")
+	public String dels(String dels) {
+		ri.removesRoles(dels.split(","));
+		return "redirect:rolesList";
+	}
+	
+	/**
+	 * 修改角色
+	 * @param id
+	 * @param response
+	 * @throws IOException
+	 */
+	@GetMapping("/edit")
+	public ModelAndView edit(Integer id,HttpServletResponse response) throws IOException {
+		Roles roles=ri.get(id);
+		ModelAndView mav=new ModelAndView("admin/roles/roles");
+		if(roles!=null) {
+			mav.addObject("roles", roles);
+		}
+		return mav;
 	}
 }

@@ -3,6 +3,7 @@ package com.ccbits.service;
 import java.util.List;
 
 import com.ccbits.entity.News;
+import com.ccbits.entity.NewsClass;
 
 /**
  * 
@@ -13,4 +14,12 @@ import com.ccbits.entity.News;
  */
 public interface NewsI {
 	public List<News> getAll();
+
+	public News get(Integer id);
+
+	public boolean removes(String[] split);
+
+	public boolean update(News news);
+
+	public boolean add(News news);
 }

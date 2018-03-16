@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>文件列表</title>
+<title>配置列表</title>
 <link rel="stylesheet" href="/static/style/style.default.css"
 	type="text/css" />
 <style>
@@ -38,24 +38,24 @@
 							</span>
 						</div>
 					</th>
-					<th class="head1">标题</th>
-					<th class="head0">时间</th>
+					<th class="head1">配置名称</th>
+					<th class="head0">配置内容</th>
 					<th class="head0">操作</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="files">
+				<c:forEach items="${list}" var="sysconfig">
 					<tr>
 						<td align="center">
 							<div class="checker" id="uniform-undefined">
 								<span> <input type="checkbox" name="chks" class="chks"
-									checked="checked" value="${files.id}" style="opacity: 0;">
+									checked="checked" value="${sysconfig.id}" style="opacity: 0;">
 								</span>
 							</div>
 						</td>
-						<td>${files.title}</td>
-						<td>${files.time}</td>
-						<td><input id="btnEdit" onclick="btnEdit(${files.id})"
+						<td>${sysconfig.title}</td>
+						<td>${sysconfig.context}</td>
+						<td><input id="btnEdit" onclick="btnEdit(${sysconfig.id})"
 							type="button" class="edit" value="编辑"></td>
 					</tr>
 				</c:forEach>
@@ -64,10 +64,24 @@
 	</div>
 </body>
 <script type="text/javascript" src="/static/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/static/js/common.js"></script>
 <script type="text/javascript">
 	$("#btnAdd").on("click", function() {
-		$(location).attr('href', '/admin/files/addOrEdit?id=');
+		$(location).attr('href', '/admin/sysconfig/addOrEdit?id=');
 	});
-	
+	//删除事件
+	$("#btnDel").on("click",function(){
+		var dels="";
+		$('input:checkbox.chks').each(function() {
+			if($(this).parent("span").attr("class") === "checked"){
+				dels+=$(this).val()+",";
+			}
+		});
+		$(location).attr("href","dels?dels="+dels.substring(0,dels.length-1));
+	});
+	//编辑
+	function btnEdit(id){
+		$(location).attr("href","edit?id="+id);
+	}
 </script>
 </html>

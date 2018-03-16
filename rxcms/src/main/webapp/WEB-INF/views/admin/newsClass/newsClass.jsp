@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>内容管理</title>
+<title>内容分类管理</title>
 <link rel="stylesheet" href="/static/style/style.default.css"
 	type="text/css" />
 <style>
@@ -16,11 +16,11 @@ p {
 
 <body>
 	<div class="pageheader">
-		<h1 class="pagetitle">内容管理</h1>
+		<h1 class="pagetitle">内容分类管理</h1>
 		<br>
 	</div>
 	<div style="margin-left: 20px;">
-		<form action="../manager/add" method="post">
+		<form class="stdform" action="../newsClass/add" method="post">
 			<input type="hidden" name="id" value="${newsClass.id}">
 			<p>
 				<label>分类名称</label> <span class="field"><input type="text"
@@ -29,7 +29,7 @@ p {
 			</p>
 			<p>
 				<label>描述</label> <span class="field">
-				<textarea name="des" cols="80"
+				<textarea name="desc" cols="80"
 						rows="5" class="longinput">${newsClass.desc }</textarea>
 				</span>
 			</p>

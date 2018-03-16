@@ -15,4 +15,6 @@ public interface NewsMapper {
     int updateByPrimaryKey(News record);
     
     List<News> selectByAll();
+
+	int deleteByKeys(String[] keys);
 }

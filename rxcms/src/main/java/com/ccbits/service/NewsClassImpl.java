@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.ccbits.entity.NewsClass;
+import com.ccbits.entity.ProductClass;
 import com.ccbits.mapper.NewsClassMapper;
 /**
  * 
@@ -22,6 +23,33 @@ public class NewsClassImpl implements NewsClassI {
 	@Override
 	public List<NewsClass> getAll() {	
 		return ncm.selectByAll();
+	}
+	@Override
+	public boolean add(NewsClass newsClass) {
+		if(ncm.insert(newsClass)>0) {
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public boolean update(NewsClass newsClass) {
+		if(ncm.updateByPrimaryKey(newsClass)>0) {
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public boolean removes(String[] split) {
+		if(ncm.deleteByKeys(split)>0) {
+			return true;
+		}
+		return false;
+		
+	}
+	@Override
+	public NewsClass get(Integer id) {
+		NewsClass newsClass=ncm.selectByPrimaryKey(id);
+		return newsClass;
 	}
 
 }

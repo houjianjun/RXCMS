@@ -19,7 +19,7 @@
 		<li><a href="#formContext" class="editor" >内容管理</a> <span
 			class="arrow"></span>
 			<ul id="formContext">
-				<li><a href="newsClass/newsClasstList" target="main">分类管理</a></li>
+				<li><a href="newsClass/newsClassList" target="main">分类管理</a></li>
 				<li><a href="news/newsList" target="main">内容管理</a></li>
 			</ul></li>
 		<li><a href="javascript:void" class="support">客户支持</a></li>

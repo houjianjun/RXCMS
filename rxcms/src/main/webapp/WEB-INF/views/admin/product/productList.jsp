@@ -28,6 +28,7 @@
 				<col class="con1">
 				<col class="con0">
 				<col class="con1">
+				<col class="con0">
 			</colgroup>
 			<thead>
 				<tr>
@@ -39,7 +40,8 @@
 						</div>
 					</th>
 					<th class="head1">名称</th>
-					<th class="head0">描述</th>
+					<th class="head0">数量</th>
+					<th class="head0">类别</th>
 					<th class="head0">操作</th>
 				</tr>
 			</thead>
@@ -54,12 +56,35 @@
 							</div>
 						</td>
 						<td>${product.name}</td>
-						<td>${productClass.des}</td>
-						<td><input id="btnEdit" onclick="btnEdit(${ productClass.id})" type="button" class="edit" value="编辑"></td>
+						<td>${product.num}</td>
+						<td>${product.clazz}</td>
+						<td><input id="btnEdit" onclick="btnEdit(${ product.id})" type="button" class="edit" value="编辑"></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 </body>
+<script type="text/javascript" src="/static/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/static/js/common.js"></script>
+<script type="text/javascript">
+	$("#btnAdd").on("click", function() {
+		$(location).attr('href', '/admin/product/addOrEdit?id=');
+	});
+	//删除事件
+	$("#btnDel").on("click",function(){
+		var dels="";
+		$('input:checkbox.chks').each(function() {
+			if($(this).parent("span").attr("class") === "checked"){
+				dels+=$(this).val()+",";
+			}
+		});
+		$(location).attr("href","dels?dels="+dels.substring(0,dels.length-1));
+	});
+	//编辑
+	function btnEdit(id){
+		$(location).attr("href","edit?id="+id);
+	}
+</script>
+
 </html>

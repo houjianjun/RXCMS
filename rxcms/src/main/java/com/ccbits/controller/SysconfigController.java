@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ccbits.entity.Roles;
 import com.ccbits.entity.Sysconfig;
 import com.ccbits.service.SysconfigI;
 
@@ -44,8 +45,6 @@ public class SysconfigController {
 	@GetMapping("/addOrEdit")
 	public ModelAndView addOrEdit(Integer id) {
 		ModelAndView mav = new ModelAndView("admin/sysconfig/sysconfig");
-		// 如果id不为空，根据id查询该对象进行编辑
-
 		return mav;
 	}
 
@@ -64,7 +63,36 @@ public class SysconfigController {
 				response.sendRedirect("sysconfigList");
 			}
 		}else {
-			
+			System.out.println(sysconfig.getId());
+			if (si.update(sysconfig)) {
+				response.sendRedirect("sysconfigList");
+			}
 		}
+	}
+	/**
+	 * 修改配置
+	 * @param sysconfig
+	 * @param response
+	 * @throws IOException
+	 */
+	@GetMapping("/edit")
+	public ModelAndView edit(Integer id,HttpServletResponse response) throws IOException {
+		Sysconfig sysconfig=si.get(id);
+		ModelAndView mav=new ModelAndView("admin/sysconfig/sysconfig");
+		if(sysconfig!=null) {
+			mav.addObject("sysconfig", sysconfig);
+		}
+		return mav;
+	}
+	/**
+	 * 删除配置
+	 * @param roles
+	 * @param response
+	 * @throws IOException
+	 */
+	@GetMapping("/dels")
+	public String dels(String dels) {
+		si.removesSysconfig(dels.split(","));
+		return "redirect:sysconfigList";
 	}
 }

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.ccbits.entity.ProductClass;
+import com.ccbits.entity.Roles;
 import com.ccbits.mapper.ProductClassMapper;
 /**
  * 
@@ -23,6 +24,36 @@ public class ProductClassImpl implements ProductClassI {
 	@Override
 	public List<ProductClass> getAll() {
 		return pm.selectByAll();
+	}
+
+	@Override
+	public ProductClass get(Integer id) {
+		ProductClass productClass=pm.selectByPrimaryKey(id);
+		return productClass;
+	}
+
+	@Override
+	public boolean removes(String[] split) {
+		if(pm.deleteByKeys(split)>0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean update(ProductClass productClass) {
+		if(pm.updateByPrimaryKey(productClass)>0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean add(ProductClass productClass) {
+		if(pm.insert(productClass)>0) {
+			return true;
+		}
+		return false;
 	}
 
 }

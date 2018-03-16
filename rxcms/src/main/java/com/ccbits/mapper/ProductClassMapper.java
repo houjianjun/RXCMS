@@ -20,4 +20,6 @@ public interface ProductClassMapper {
     int updateByPrimaryKey(ProductClass record);
     
     List<ProductClass> selectByAll();
+
+	int deleteByKeys(String[] keys);
 }

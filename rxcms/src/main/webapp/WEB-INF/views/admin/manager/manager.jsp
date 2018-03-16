@@ -32,7 +32,7 @@
 				<small class="desc">请输入密码.</small>
 			</p>
 			<p class="stdformbutton">
-				<button type="submit" class="submit radius2">添加</button>
+				<button type="submit" class="submit radius2">保存</button>
 				<input type="reset" class="reset radius2" value="重置">
 			</p>
 			</form>

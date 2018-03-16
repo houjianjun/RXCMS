@@ -8,21 +8,14 @@
     <result column="P_Class" property="clazz" jdbcType="VARCHAR" />
     <result column="P_Datetime" property="datetime" jdbcType="TIMESTAMP" />
     <result column="P_price" property="price" jdbcType="DECIMAL" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.ccbits.entity.Product" extends="BaseResultMap" >
     <result column="P_Des" property="des" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    P_Id, P_Name, P_Num, P_Class, P_Datetime, P_price
+    P_Id, P_Name, P_Num, P_Class, P_Datetime, P_price,P_Des
   </sql>
-  <sql id="Blob_Column_List" >
-    P_Des
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from product
     where P_Id = #{id,jdbcType=INTEGER}
   </select>
@@ -30,6 +23,16 @@
     delete from product
     where P_Id = #{id,jdbcType=INTEGER}
   </delete>
+  	<!-- 批量删除 -->
+	<delete id="deleteByKeys" parameterType="java.lang.String">
+		delete from
+		product
+		where P_Id in
+		<foreach item="keys" collection="array" open="(" separator=","
+			close=")">
+			#{keys}
+		</foreach>
+	</delete>
   <insert id="insert" parameterType="com.ccbits.entity.Product" >
     insert into product (P_Id, P_Name, P_Num, 
       P_Class, P_Datetime, P_price, 
@@ -43,9 +46,10 @@
     update product
     set P_Name = #{name,jdbcType=VARCHAR},
       P_Num = #{num,jdbcType=INTEGER},
-      P_Class = #{class,jdbcType=VARCHAR},
+      P_Class = #{clazz,jdbcType=VARCHAR},
       P_Datetime = #{datetime,jdbcType=TIMESTAMP},
-      P_price = #{price,jdbcType=DECIMAL}
+      P_price = #{price,jdbcType=DECIMAL},
+      P_Des=#{des,jdbcType=VARCHAR}
     where P_Id = #{id,jdbcType=INTEGER}
   </update>
     <!-- 查询所有 -->

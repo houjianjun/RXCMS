@@ -13,4 +13,12 @@ import com.ccbits.entity.NewsClass;
  */
 public interface NewsClassI {
 	public List<NewsClass> getAll();
+
+	public boolean add(NewsClass newsClass);
+
+	public boolean update(NewsClass newsClass);
+
+	public boolean removes(String[] split);
+
+	public NewsClass get(Integer id);
 }

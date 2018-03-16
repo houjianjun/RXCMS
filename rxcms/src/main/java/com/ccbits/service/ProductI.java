@@ -13,5 +13,13 @@ import com.ccbits.entity.Product;
  */
 public interface ProductI {
 	public List<Product> getAll();
+
+	public Product get(Integer id);
+
+	public boolean removes(String[] split);
+
+	public boolean update(Product product);
+
+	public boolean add(Product product);
 	
 }
