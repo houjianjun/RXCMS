@@ -28,14 +28,14 @@ p {
 					class="desc">请输入标题名.</small>
 			</p>
 			<p>
-				<label>作者</label>
-				<span class="field"><input type="text" name="author" value="${news.author }"  class="smallinput"></span>
-				<small class="desc">请输入作者.</small>
+				<label>作者</label> <span class="field"><input type="text"
+					name="author" value="${news.author }" class="smallinput"></span> <small
+					class="desc">请输入作者.</small>
 			</p>
 			<p>
-				<label>内容</label> <span class="field">
-				<textarea name="content" cols="80"
-						rows="5" class="longinput">${news.context }</textarea>
+				<label>内容</label> <span class="field"> 
+				<script id="container"
+						name="context" type="text/plain" style="width: 80%; height: 100%;">${news.context }</script>
 				</span>
 			</p>
 			<p class="stdformbutton">
@@ -44,5 +44,17 @@ p {
 			</p>
 		</form>
 	</div>
+	<script type="text/javascript" src="/static/js/jquery-3.3.1.js"></script>
+	<!-- ueditor文件 -->
+	<!-- 配置文件 -->
+	<script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+	<!-- 编辑器源码文件 -->
+	<script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+	<script type="text/javascript" charset="utf-8"
+		src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript">
+		//实例化编辑器
+		var ue = UE.getEditor('container');
+	</script>
 </body>
 </html>

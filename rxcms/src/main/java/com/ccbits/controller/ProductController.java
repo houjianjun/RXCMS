@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ccbits.entity.Product;
-import com.ccbits.entity.Roles;
+import com.ccbits.entity.ProductClass;
+import com.ccbits.service.ProductClassI;
 import com.ccbits.service.ProductI;
 
 /**
@@ -28,6 +29,8 @@ import com.ccbits.service.ProductI;
 public class ProductController {
 	@Resource
 	private ProductI pi;
+	@Resource
+	private ProductClassI pci;
 	/**
 	 * 产品列表
 	 * @return
@@ -43,7 +46,8 @@ public class ProductController {
 	public ModelAndView addOrEdit(Integer id) {
 		ModelAndView mav = new ModelAndView("admin/product/product");
 		// 如果id不为空，根据id查询该对象进行编辑
-
+		List<ProductClass> list=pci.getAll();
+		mav.addObject("list", list);
 		return mav;
 	}
 

@@ -56,6 +56,7 @@ public class NewsController {
 	 */
 	@PostMapping("/add")
 	public void add(News news, HttpServletResponse response) throws IOException {
+		System.out.println(news.getContext());
 		if (null == news.getId() || news.getId() == 0) {
 			if (ni.add(news)) {
 				response.sendRedirect("newsList");
